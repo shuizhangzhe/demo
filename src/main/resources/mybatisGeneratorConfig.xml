@@ -100,7 +100,7 @@
                      -->
 
         <!-- ** 表模板 -->
-        <table tableName="s_user" domainObjectName="User">
+        <table tableName="t_user" domainObjectName="User">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
