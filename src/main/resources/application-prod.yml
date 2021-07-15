@@ -1,0 +1,59 @@
+server:
+  # 内置tomcat端口
+  port: 8080
+  tomcat:
+    # URL字符编码
+    uri-encoding: UTF-8
+  servlet:
+    session:
+      # session生命周期
+      timeout: 30m
+
+spring:
+  datasource:
+    # 数据库引擎
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库地址 *
+    url: jdbc:mysql://localhost:3306/demo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+    # 数据库用户名 *
+    username: root
+    # 数据库密码 *
+    password: 123456
+    # 数据连接池类型
+    type: com.alibaba.druid.pool.DruidDataSource
+    # druid数据源专有配置
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: false
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      # 配置监控统计拦截的filters. stat:监控统计; log4j:日志记录; wall:防止sql注入.
+      filters: stat,wall
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500;
+
+mybatis:
+  mapper-locations: classpath:/mapping/*.xml,classpath:/mapping/custom/*.xml
+  # 对应 Mapper.xml 的 XXXMapper.java 地址 *
+  type-aliases-package: demo.repository.mapper
+  configuration:
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    lazy-loading-enabled: true
+    cache-enabled: true
+    aggressiveLazyLoading: true
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  pageSizeZero: false
+
+

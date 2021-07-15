@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: "@activatedProperties@"
+  devtools:
+    livereload:
+      # 热部署端口，不要和运行的端口重复即可
+      port: 9090
+  servlet:
+    multipart:
+      # 单文件大小限制
+      max-file-size: 10MB
+      # 总文件大小限制
+      max-request-size: 10MB
