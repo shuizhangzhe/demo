@@ -1,18 +1,14 @@
 package demo.repository.po;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-@Builder
-public class User {
+public class UserRole {
     private Long id;
-    private String fullName;
-    private String userName;
-    private String password;
-    private Boolean enabled;
+    private Long userId;
+    private Long roleId;
 
     private Date createdAt;
     private String createdBy;

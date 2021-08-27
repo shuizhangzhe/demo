@@ -11,3 +11,7 @@ spring:
       max-file-size: 10MB
       # 总文件大小限制
       max-request-size: 10MB
+
+jwt:
+  config:
+    secret_key: "C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3s6v9y$B&E)H@McQfTjWnZr4u7w"

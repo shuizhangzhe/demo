@@ -21,8 +21,14 @@ public enum StatusCodeEnum {
     USERNAME_PASSWORD_ERROR(101,"用户名或密码错误"),
     // 用户名已存在
     USERNAME_EXISTED_ERROR(102, "用户名已存在"),
+    // 用户名不存在
+    USERNAME_NOT_EXISTED_ERROR(103, "用户名不存在"),
     // 验证码错误
-    VERIFY_CODE_ERROR(103, "验证码错误"),
+    VERIFY_CODE_ERROR(104, "验证码错误"),
+    // 角色已存在
+    ROLE_EXISTED_ERROR(105, "角色已存在"),
+    // 角色不存在
+    ROLE_NOT_EXISTED_ERROR(106, "角色不存在"),
     // 参数异常
     PARAM_EXCEPTION(401,"参数异常"),
     // 数字格式转换错误

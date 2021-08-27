@@ -7,12 +7,11 @@ import java.util.Date;
 
 @Data
 @Builder
-public class User {
+public class Role {
     private Long id;
-    private String fullName;
-    private String userName;
-    private String password;
-    private Boolean enabled;
+    private String tag;
+    private String name;
+    private String description;
 
     private Date createdAt;
     private String createdBy;

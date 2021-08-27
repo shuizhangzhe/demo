@@ -21,6 +21,4 @@ public class ResponseVO<T> {
     private String msg;
     /** 返回数据 */
     private T data;
-    /** 返回堆栈 */
-    private String stack;
 }

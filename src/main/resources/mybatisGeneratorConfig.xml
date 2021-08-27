@@ -16,7 +16,7 @@
         <!-- 注释 -->
         <commentGenerator>
             <!-- 是否不生成注释 -->
-            <property name="suppressAllComments" value="false"/>
+            <property name="suppressAllComments" value="true"/>
             <!-- 添加 db 表中字段的注释，只有suppressAllComments为false时才生效-->
             <property name="addRemarkComments" value="true"/>
             <!-- 不希望生成的注释中包含时间戳 -->
@@ -100,14 +100,23 @@
                      -->
 
         <!-- ** 表模板 -->
-        <table tableName="t_user" domainObjectName="User">
+<!--        <table tableName="t_demo" domainObjectName="Demo">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="s_user" domainObjectName="User">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="s_role" domainObjectName="Role">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="s_user_role" domainObjectName="UserRole">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
-        <!-- ** 视图模板 -->
-        <table tableName="v_user" domainObjectName="UserView"
-               enableDeleteByExample="false" enableDeleteByPrimaryKey="false"
-               enableUpdateByExample="false" enableUpdateByPrimaryKey="false"
-               enableInsert="false"/>
+<!--        &lt;!&ndash; ** 视图模板 &ndash;&gt;-->
+<!--        <table tableName="v_user" domainObjectName="UserView"-->
+<!--               enableDeleteByExample="false" enableDeleteByPrimaryKey="false"-->
+<!--               enableUpdateByExample="false" enableUpdateByPrimaryKey="false"-->
+<!--               enableInsert="false"/>-->
     </context>
 </generatorConfiguration>

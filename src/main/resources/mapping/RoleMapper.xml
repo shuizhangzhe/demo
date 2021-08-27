@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="demo.repository.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="demo.repository.po.User">
+<mapper namespace="demo.repository.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="demo.repository.po.Role">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
@@ -71,16 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, full_name, user_name, `password`, enabled, created_at, created_by, updated_at, 
-    updated_by
+    id, tag, `name`, description, created_at, created_by, updated_at, updated_by
   </sql>
-  <select id="selectByExample" parameterType="demo.repository.po.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="demo.repository.po.RoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from s_user
+    from s_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,47 +89,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from s_user
+    from s_role
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from s_user
+    delete from s_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="demo.repository.po.UserExample">
-    delete from s_user
+  <delete id="deleteByExample" parameterType="demo.repository.po.RoleExample">
+    delete from s_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="demo.repository.po.User">
+  <insert id="insert" parameterType="demo.repository.po.Role">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into s_user (full_name, user_name, `password`, 
-      enabled, created_at, created_by, 
-      updated_at, updated_by)
-    values (#{fullName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{enabled,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, 
-      #{updatedAt,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR})
+    insert into s_role (tag, `name`, description, 
+      created_at, created_by, updated_at, 
+      updated_by)
+    values (#{tag,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{updatedBy,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="demo.repository.po.User">
+  <insert id="insertSelective" parameterType="demo.repository.po.Role">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into s_user
+    insert into s_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="fullName != null">
-        full_name,
+      <if test="tag != null">
+        tag,
       </if>
-      <if test="userName != null">
-        user_name,
+      <if test="name != null">
+        `name`,
       </if>
-      <if test="password != null">
-        `password`,
-      </if>
-      <if test="enabled != null">
-        enabled,
+      <if test="description != null">
+        description,
       </if>
       <if test="createdAt != null">
         created_at,
@@ -147,17 +142,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="fullName != null">
-        #{fullName,jdbcType=VARCHAR},
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
       </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="enabled != null">
-        #{enabled,jdbcType=BIT},
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -173,29 +165,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="demo.repository.po.UserExample" resultType="java.lang.Long">
-    select count(*) from s_user
+  <select id="countByExample" parameterType="demo.repository.po.RoleExample" resultType="java.lang.Long">
+    select count(*) from s_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update s_user
+    update s_role
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.fullName != null">
-        full_name = #{record.fullName,jdbcType=VARCHAR},
+      <if test="record.tag != null">
+        tag = #{record.tag,jdbcType=VARCHAR},
       </if>
-      <if test="record.userName != null">
-        user_name = #{record.userName,jdbcType=VARCHAR},
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        `password` = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.enabled != null">
-        enabled = #{record.enabled,jdbcType=BIT},
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -215,12 +204,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update s_user
+    update s_role
     set id = #{record.id,jdbcType=BIGINT},
-      full_name = #{record.fullName,jdbcType=VARCHAR},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      `password` = #{record.password,jdbcType=VARCHAR},
-      enabled = #{record.enabled,jdbcType=BIT},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       created_by = #{record.createdBy,jdbcType=VARCHAR},
       updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
@@ -229,20 +217,17 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="demo.repository.po.User">
-    update s_user
+  <update id="updateByPrimaryKeySelective" parameterType="demo.repository.po.Role">
+    update s_role
     <set>
-      <if test="fullName != null">
-        full_name = #{fullName,jdbcType=VARCHAR},
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
       </if>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        `password` = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="enabled != null">
-        enabled = #{enabled,jdbcType=BIT},
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -259,12 +244,11 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="demo.repository.po.User">
-    update s_user
-    set full_name = #{fullName,jdbcType=VARCHAR},
-      user_name = #{userName,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      enabled = #{enabled,jdbcType=BIT},
+  <update id="updateByPrimaryKey" parameterType="demo.repository.po.Role">
+    update s_role
+    set tag = #{tag,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       created_by = #{createdBy,jdbcType=VARCHAR},
       updated_at = #{updatedAt,jdbcType=TIMESTAMP},

@@ -55,9 +55,6 @@ public class ParameterWrapperUtils {
         ResponseVO<T> res = new ResponseVO<>();
         res.setCode(e.getCode());
         res.setMsg(e.getMsg());
-        if (e.getResponse() != null) {
-            res.setStack(e.getResponse().toString());
-        }
         return res;
     }
 }

@@ -1,65 +1,20 @@
 package demo.service;
 
-import com.github.pagehelper.PageInfo;
 import demo.repository.po.User;
+import demo.repository.vo.UserRegisterRequestVO;
+import demo.repository.vo.UserUpdateRequestVO;
 
-import java.util.List;
-
-/**
- * @author Administrator
- */
 public interface UserService {
 
-    /**
-     * 添加用户信息
-     *
-     * @param user 财务信息
-     */
-    void insert(User user);
+    void save(UserRegisterRequestVO userRegisterRequestVO);
 
-    /**
-     * 删除用户信息
-     *
-     * @param id 用户id
-     */
-    void delete(Integer id);
+    User find(String userName);
 
-    /**
-     * 删除用户信息
-     *
-     * @param ids 用户ids
-     */
-    void deleteAll(List<Integer> ids);
+    void update(UserUpdateRequestVO userUpdateRequestVO);
 
-    /**
-     * 修改用户信息
-     *
-     * @param user 财务信息
-     */
-    void update(User user);
+    void delete(String userName);
 
-    /**
-     * 查询某个用户信息
-     *
-     * @param id 用户id
-     * @return 某个用户信息
-     */
-    User selectOne(Integer id);
+    boolean check(String currentPassword, String password);
 
-    /**
-     * 分页查询用户信息
-     *
-     * @param pageNum 当前页数
-     * @param pageSize 记录最大条数
-     * @param orderBy 排序条件 如："id desc, name asc"
-     * @return 用户信息列表分页
-     */
-    PageInfo<User> selectPage(Integer pageNum, Integer pageSize, String orderBy);
-
-    /**
-     * 查询所有列表
-     *
-     * @return 用户信息列表
-     */
-    List<User> selectAll();
+    void ensureUserNameNotExist(String userName);
 }
